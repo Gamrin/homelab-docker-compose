@@ -1,7 +1,7 @@
 ---
 version: "3.0"
 #include:
-  #- /home/docker/immich/docker-compose-immich.yml
+  #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
 
 services:
 ########################################################
@@ -17,7 +17,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/radarr/config:/config
+      - ${DOCKERDATAPATH}radarr/config:/config
       - /mnt/films:/movies #optional
       - /mnt/downloads/UsenetDownloads:/downloads #optional
     ports:
@@ -31,7 +31,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/sonarr/config:/config
+      - ${DOCKERDATAPATH}sonarr/config:/config
       - /mnt/anime:/anime #optional
       - /mnt/series:/series #optional
       - /mnt/cartoons:/cartoons #optional
@@ -47,7 +47,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/sonarrNL/config:/config
+      - ${DOCKERDATAPATH}sonarrNL/config:/config
       - /mnt/anime:/anime #optional
       - /mnt/series:/series #optional
       - /mnt/cartoons:/cartoons #optional
@@ -63,7 +63,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/overseerr/config:/config
+      - ${DOCKERDATAPATH}overseerr/config:/config
     ports:
       - 5055:5055
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/readarr/config:/config
+      - ${DOCKERDATAPATH}readarr/config:/config
       - /mnt/ebooks:/ebooks
       - /mnt/downloads/UsenetDownloads:/downloads
     ports:
@@ -94,7 +94,7 @@ services:
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /home/docker/plex/config:/config
+      - ${DOCKERDATAPATH}plex/config:/config
       - /mnt/series:/tv
       - /mnt/anime:/anime
       - /mnt/cartoons:/cartoons
@@ -162,7 +162,7 @@ services:
       - TZ=Etc/UTC
       - WEBUI_PORT=8081
     volumes:
-      - /home/docker/qbittorrent/config:/config
+      - ${DOCKERDATAPATH}qbittorrent/config:/config
       - /mnt/downloads/TorrentDownloads:/downloads
     ports:
       - 8081:8081
@@ -184,7 +184,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /home/docker/homepage/config:/app/config # Make sure your local config directory exists
+      - ${DOCKERDATAPATH}homepage/config:/app/config # Make sure your local config directory exists
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
       - /mnt/anime:/anime #optional
       - /mnt/series:/series #optional
@@ -202,7 +202,7 @@ services:
     ports:
       - 3001:3000
     volumes:
-      - /home/docker/grafana:/var/lib/grafana
+      - ${DOCKERDATAPATH}grafana:/var/lib/grafana
     restart:
       always 
       
@@ -236,8 +236,8 @@ services:
       # DISABLE_IPV6: 'true'
 
     volumes:
-      - /home/docker/NPM/data:/data
-      - /home/docker/NPM//letsencrypt:/etc/letsencrypt
+      - ${DOCKERDATAPATH}NPM/data:/data
+      - ${DOCKERDATAPATH}NPM//letsencrypt:/etc/letsencrypt
 # UNIFI
   unifi-network-application:
     image: lscr.io/linuxserver/unifi-network-application:latest
@@ -256,7 +256,7 @@ services:
       # - MONGO_TLS= #optional
       # - MONGO_AUTHSOURCE= #optional
     volumes:
-      - /home/docker/unifi-network-application/config:/config
+      - ${DOCKERDATAPATH}unifi-network-application/config:/config
     ports:
       - 8443:8443
       - 3478:3478/udp
@@ -277,8 +277,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /home/docker/unifi-db/data:/data/db
-      - /home/docker/unifi-db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ${DOCKERDATAPATH}unifi-db/data:/data/db
+      - ${DOCKERDATAPATH}unifi-db/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     restart: unless-stopped
 
   netbootxyz:
@@ -295,8 +295,8 @@ services:
       - SUBFOLDER=/ #optional
 
     volumes:
-      - /home/docker/netbootxyz/config:/config # optional
-      - /home/docker/netbootxyz/assets:/assets # optional
+      - ${DOCKERDATAPATH}netbootxyz/config:/config # optional
+      - ${DOCKERDATAPATH}netbootxyz/assets:/assets # optional
     ports:
       - 3020:3000  # optional, destination should match ${WEB_APP_PORT} variable above.
       - 69:69/udp
@@ -312,7 +312,7 @@ services:
       # - PGID=1000
       # - TZ=Europe/Amsterdam
     # volumes:
-      # - /home/docker/syncthing/config
+      # - ${DOCKERDATAPATH}syncthing/config
       # - /path/to/data1:/data1
       # - /path/to/data2:/data2
     # ports:
