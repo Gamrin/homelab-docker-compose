@@ -108,7 +108,7 @@ services:
       - PGID=1000
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/docker/bazarr/config:/config
+      - ${DOCKERDATAPATH}bazarr/config:/config
       - /mnt/anime:/anime
       - /mnt/series:/series
       - /mnt/cartoons:/cartoons
@@ -118,21 +118,7 @@ services:
       - 6767:6767
     restart: unless-stopped
 # Images
-# Documents
-  paperless-ngx:
-    image: lscr.io/linuxserver/paperless-ngx:latest
-    container_name: paperless-ngx
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-      #- REDIS_URL= #optional
-    volumes:
-      - /home/docker/paperless-ngx/config:/config
-      - /home/docker/paperless-ngx/data:/data
-    ports:
-      - 8000:8000
-    restart: unless-stopped
+
 
 ######################################################## 
 # Downloading
@@ -145,7 +131,7 @@ services:
     ports:
       - 4848:4848
     volumes:
-      - /home/docker/tubesync/config:/config
+      - ${DOCKERDATAPATH}tubesync/config:/config
       - /mnt/youtubesync:/downloads
     environment:
       - TZ=Europe/Amsterdam
@@ -162,7 +148,7 @@ services:
       - NZBGET_USER=${NZBGET_USER} #optional
       - NZBGET_PASS=${NZBGET_PASS} #optional
     volumes:
-      - /home/docker/nzbget/data:/config
+      - ${DOCKERDATAPATH}nzbget/data:/config
       - /mnt/downloads/UsenetDownloads:/downloads #optional
     ports:
       - 6789:6789
