@@ -1,7 +1,8 @@
 ---
-version: "3.0"
-#include:
+version: "3.2"
+include:
   #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
+  - docker-compose-paperlessngx.yml
 
 services:
 ########################################################

@@ -34,26 +34,38 @@ version: "3.4"
 services:
   broker:
     image: docker.io/library/redis:7
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC    
     restart: unless-stopped
     volumes:
-      - redisdata:/data
+      - ${DOCKERDATAPATH}paperlessngx/redisdata:/data
     networks:
       paperless:
 
   db:
     image: docker.io/library/postgres:15
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     restart: unless-stopped
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: paperless
-      POSTGRES_USER: paperless
-      POSTGRES_PASSWORD: paperless
+      POSTGRES_USER: ${POSTGRESUSER}
+      POSTGRES_PASSWORD: ${POSTGRESPASS}
     networks:
       paperless:
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     restart: unless-stopped
     depends_on:
       - db
@@ -64,10 +76,10 @@ services:
     #ports:
     #  - "8005:8000"
     volumes:
-      - data:/usr/src/paperless/data
+      - ${DOCKERDATAPATH}paperlessngx:/usr/src/paperless/data
       - media:/usr/src/paperless/media
-      - ./export:/usr/src/paperless/export
-      - ./consume:/usr/src/paperless/consume
+      - ${DOCKERDATAPATH}paperlessngx/export:/usr/src/paperless/export
+      - ${DOCKERDATAPATH}paperlessngx/consume:/usr/src/paperless/consume
     env_file: .env
     environment:
       PAPERLESS_REDIS: redis://broker:6379
