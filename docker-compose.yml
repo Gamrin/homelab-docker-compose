@@ -239,6 +239,56 @@ services:
     volumes:
       - ${DOCKERDATAPATH}NPM/data:/data
       - ${DOCKERDATAPATH}NPM//letsencrypt:/etc/letsencrypt
+
+#Traefik
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+       proxy:
+    ports:
+      - 780:80
+      - 7443:443
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - CF_API_EMAIL=${CF_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_APITOKEN}
+      # - CF_API_KEY=YOU_API_KEY
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${DOCKERDATAPATH}traefik/traefik.yml:/traefik.yml:ro
+      - ${DOCKERDATAPATH}traefik/acme.json:/acme.json
+      - ${DOCKERDATAPATH}traefik/config.yml:/config.yml:ro
+      - ${DOCKERDATAPATH}traefik/logs:/var/log/traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=http"
+      - "traefik.http.routers.traefik.rule=Host(`traefik-dashboard.klausnet.nl`)"
+      - "traefik.http.middlewares.traefik-auth.basicauth.users=YOUR_USERNAME_PASSWORD"
+      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
+      - "traefik.http.routers.traefik-secure.entrypoints=https"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik-dashboard.klausnet.nl`)"
+      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=klausnet.nl"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.klausnet.nl"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+
+
+
+
+
+
+
 # UNIFI
   unifi-network-application:
     image: lscr.io/linuxserver/unifi-network-application:latest
@@ -324,3 +374,7 @@ services:
     # restart: unless-stopped
 
 
+networks:
+  proxy:
+    name: proxy
+    external: true
