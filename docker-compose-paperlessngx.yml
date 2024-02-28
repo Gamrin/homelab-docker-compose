@@ -75,7 +75,7 @@ services:
       - media:/usr/src/paperless/media
       - ${DOCKERDATAPATH}paperlessngx/export:/usr/src/paperless/export
       - ${DOCKERDATAPATH}paperlessngx/consume:/usr/src/paperless/consume
-    env_file: .env
+    env_file: /home/sander/homelab-docker-compose/.env
     environment:
       - PUID=1000
       - PGID=1000
