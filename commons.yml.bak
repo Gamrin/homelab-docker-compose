@@ -1,0 +1,4 @@
+networks:
+#  paperless:
+#  proxy:
+ #   external: true

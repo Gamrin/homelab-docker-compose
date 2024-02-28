@@ -2,6 +2,7 @@
 version: "3.3"
 include:
   #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
+  - /home/sander/homelab-docker-compose/commons.yml
   - /home/sander/homelab-docker-compose/docker-compose-paperlessngx.yml
 
 services:
@@ -256,8 +257,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      #- CF_API_EMAIL=your@email.com
-      #- CF_DNS_API_TOKEN=your-api-key
+      - CF_API_EMAIL=${CF_EMAIL}
+      - CF_DNS_API_TOKEN=${CF_APITOKEN}
       # - CF_API_KEY=YOU_API_KEY
     volumes:
       - /etc/localtime:/etc/localtime:ro

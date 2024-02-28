@@ -2,6 +2,7 @@
 version: "3.3"
 include:
   #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
+  - /home/sander/homelab-docker-compose/commons.yml
   - /home/sander/homelab-docker-compose/docker-compose-paperlessngx.yml
 
 services:
@@ -373,8 +374,3 @@ services:
       # - 21027:21027/udp
     # restart: unless-stopped
 
-
-networks:
-  proxy:
-    name: proxy
-    external: true
