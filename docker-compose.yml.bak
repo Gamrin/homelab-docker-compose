@@ -1,5 +1,5 @@
 ---
-version: "3.3"
+version: "3.2"
 include:
   #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
   - /home/sander/homelab-docker-compose/docker-compose-paperlessngx.yml

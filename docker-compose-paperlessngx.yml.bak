@@ -56,7 +56,6 @@ services:
       POSTGRES_DB: paperless
       POSTGRES_USER: ${POSTGRESUSER}
       POSTGRES_PASSWORD: ${POSTGRESPASS}
-
     networks:
       paperless:
 
