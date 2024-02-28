@@ -50,9 +50,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: paperless
-      POSTGRES_USER: ${POSTGRESUSER}
-      POSTGRES_PASSWORD: ${POSTGRESPASS}
+      - POSTGRES_DB: paperless
+      - POSTGRES_USER: ${POSTGRESUSER}
+      - POSTGRES_PASSWORD: ${POSTGRESPASS}
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
