@@ -30,7 +30,7 @@
 # For more extensive installation and update instructions, refer to the
 # documentation.
 
-version: "3.5"
+version: "3.6"
 services:
   broker:
     image: docker.io/library/redis:7
@@ -50,19 +50,17 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
       POSTGRES_DB: paperless
       POSTGRES_USER: ${POSTGRESUSER}
       POSTGRES_PASSWORD: ${POSTGRESPASS}
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
     networks:
       paperless:
 
   webserver:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
-    environment:
-
     restart: unless-stopped
     depends_on:
       - db
