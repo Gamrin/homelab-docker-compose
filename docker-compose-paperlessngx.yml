@@ -127,7 +127,3 @@ volumes:
   pgdata:
   redisdata:
 
-networks:
-  paperless:
-#  proxy:
- #   external: true
