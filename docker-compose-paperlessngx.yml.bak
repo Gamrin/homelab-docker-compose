@@ -50,12 +50,9 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB: paperless
-      - POSTGRES_USER: ${POSTGRESUSER}
-      - POSTGRES_PASSWORD: ${POSTGRESPASS}
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      POSTGRES_DB: paperless
+      POSTGRES_USER: ${POSTGRESUSER}
+      POSTGRES_PASSWORD: ${POSTGRESPASS}
     networks:
       paperless:
 
@@ -75,7 +72,7 @@ services:
       - media:/usr/src/paperless/media
       - ${DOCKERDATAPATH}paperlessngx/export:/usr/src/paperless/export
       - ${DOCKERDATAPATH}paperlessngx/consume:/usr/src/paperless/consume
-    env_file: .env
+    env_file: /home/sander/homelab-docker-compose/.env
     environment:
       - PUID=1000
       - PGID=1000
