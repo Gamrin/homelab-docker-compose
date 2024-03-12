@@ -88,19 +88,19 @@ services:
     networks:
       paperless:
       proxy:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.paperless.entrypoints=http"
-      - "traefik.http.routers.paperless.rule=Host(`paperless.klausnet.nl`)"
-      - "traefik.http.middlewares.paperless-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.routers.paperless.middlewares=paperless-https-redirect"
-      - "traefik.http.routers.paperless-secure.entrypoints=https"
-      - "traefik.http.routers.paperless-secure.rule=Host(`paperless.klausnet.nl`)"
-      - "traefik.http.routers.paperless-secure.tls=true"
-      - "traefik.http.routers.paperless-secure.tls.certresolver=cloudflare" # change this to your cert resolver
-      - "traefik.http.routers.paperless-secure.service=paperless" 
-      - "traefik.http.services.paperless.loadbalancer.server.port=8000"
-      - "traefik.docker.network=proxy"
+    #labels:
+    #  - "traefik.enable=true"
+    #  - "traefik.http.routers.paperless.entrypoints=http"
+    #  - "traefik.http.routers.paperless.rule=Host(`paperless.klausnet.nl`)"
+    #  - "traefik.http.middlewares.paperless-https-redirect.redirectscheme.scheme=https"
+    #  - "traefik.http.routers.paperless.middlewares=paperless-https-redirect"
+    #  - "traefik.http.routers.paperless-secure.entrypoints=https"
+    #  - "traefik.http.routers.paperless-secure.rule=Host(`paperless.klausnet.nl`)"
+    #  - "traefik.http.routers.paperless-secure.tls=true"
+    #  - "traefik.http.routers.paperless-secure.tls.certresolver=cloudflare" # change this to your cert resolver
+    #  - "traefik.http.routers.paperless-secure.service=paperless" 
+    #  - "traefik.http.services.paperless.loadbalancer.server.port=8000"
+    #  - "traefik.docker.network=proxy"
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:7.10
