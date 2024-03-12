@@ -65,8 +65,8 @@ services:
       - gotenberg
       - tika
     # Not needed as we're using Traefik
-    #ports:
-    #  - "8005:8000"
+    ports:
+      - "8005:8000"
     volumes:
       - ${DOCKERDATAPATH}paperlessngx:/usr/src/paperless/data
       - media:/usr/src/paperless/media

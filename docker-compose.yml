@@ -1,10 +1,9 @@
 ---
 version: "3.3"
 include:
-  #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
   - /home/sander/homelab-docker-compose/commons.yml
   - /home/sander/homelab-docker-compose/docker-compose-paperlessngx.yml
-
+  #- ${DOCKERDATAPATH}immich/docker-compose-immich.yml
 services:
 ########################################################
 # Media Management
